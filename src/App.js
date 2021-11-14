@@ -1,11 +1,13 @@
+import React from 'react';
 import 'fomantic-ui-css/semantic.css';
-import './App.css';
+import Weather from '../src/ui/layouts/Weather';
 
-function App() {
-  return (
-    <div className="App">
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <div>
+            <Weather />
+        </div>
+    );
+};
 
 export default App;
