@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { fetchWeather } from '../api/Weather';
 
-const cities = ['Estonia', 'Mexico'];
+const cities = ['Estonia', 'Mexico', 'Sydney', 'Korea'];
 
 const initialState = {
     selectedCity: '',
     citiesWeather: [],
+    lastUpdate: '',
 };
 
 const ACTIONS = {
@@ -50,19 +51,20 @@ export const WeatherProvider = ({ children }) => {
                     name: weather.name,
                     weather: weather.weather,
                     main: weather.main,
-                    datetime: new Date(weather.dt * 1000).toLocaleString(
-                        'en-US',
-                        {
-                            weekday: 'short',
-                            month: 'long',
-                            day: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit',
-                        }
-                    ),
+                    // datetime: new Date(weather.dt * 1000).toLocaleString(
+                    //     'en-US',
+                    //     {
+                    //         weekday: 'short',
+                    //         month: 'long',
+                    //         day: 'numeric',
+                    //         hour: '2-digit',
+                    //         minute: '2-digit',
+                    //     }
+                    // ),
                     id: weather.id,
                     icon: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
                     temp: weather.main.temp,
+                    description: weather.weather[0].description,
                 };
             });
             dispatch(updateCitiesWeather(weatherFormated));
