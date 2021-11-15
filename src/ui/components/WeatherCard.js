@@ -23,11 +23,11 @@ const layout = css`
         }
         &__temp {
             flex: 0.8;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             text-align: center;
         }
         &__details {
-            flex: 1;
+            flex: 0.8;
             &-city {
                 font-size: 1.3rem;
             }
@@ -43,7 +43,7 @@ const WeatherCard = ({ className, weather, isSelected, onClick }) => {
         <Card
             className={className}
             onClick={() => onClick(weather.name)}
-            color={isSelected ? 'yellow' : undefined}
+            color={isSelected ? 'orange' : undefined}
         >
             <div className="card__weather">
                 <img src={weather.icon} />

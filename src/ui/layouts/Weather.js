@@ -8,12 +8,12 @@ const layout = css`
     display: flex;
     height: 100%;
     margin-bottom: 0;
-    width: 80%;
+    width: 90%;
     margin: auto;
 `;
 
 const WeatherCardsContainer = styled.div`
-    flex: 0.7;
+    flex: 0.5;
     padding: 32px 0 32px 32px;
 `;
 
@@ -23,7 +23,6 @@ const WeatherDetailContainer = styled.div`
 `;
 
 const WeatherCardRow = styled.div`
-    // background: red;
     display: flex;
     &:not(:last-child) {
         margin-bottom: 12px;
@@ -35,16 +34,11 @@ const WeatherCardRow = styled.div`
 `;
 
 const Selected = styled.div`
-    // background: green;
-    // height: 100%;
-    // width: 10%;
     width: 0;
     height: 0;
     border-top: 30px solid transparent;
     border-bottom: 30px solid transparent;
-
     border-right: 30px solid #ede7e3;
-    // padding-bottom: 1rem;
     margin: auto 0 auto auto;
 `;
 

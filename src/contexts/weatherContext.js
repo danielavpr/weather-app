@@ -96,7 +96,7 @@ export const WeatherState = ({ children }) => {
                 description: weather.current.weather[0].description,
                 humidity: weather.current.humidity,
                 daily: weather.daily,
-                hourly: weather.hourly,
+                hourly: weather.hourly.slice(0, 12),
                 // main: weather.main,
                 // datetime: new Date(weather.dt * 1000).toLocaleString(
                 //     'en-US',
