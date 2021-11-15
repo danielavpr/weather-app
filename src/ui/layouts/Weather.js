@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { useWeather } from '../../contexts/WeatherContext';
+import { Button, Icon } from 'semantic-ui-react';
 import WeatherCard from '../components/WeatherCard';
 import WeatherDetail from '../components/WeatherDetail';
 
@@ -15,6 +16,16 @@ const layout = css`
 const WeatherCardsContainer = styled.div`
     flex: 0.5;
     padding: 32px 0 32px 32px;
+    .cards {
+        &__update {
+            display: flex;
+            justify-content: space-between;
+            margin-right: 35px;
+            align-items: baseline;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+    }
 `;
 
 const WeatherDetailContainer = styled.div`
@@ -43,15 +54,28 @@ const Selected = styled.div`
 `;
 
 const Weather = ({ className }) => {
-    const { citiesWeather, selectedCity, updateSelectedCity } = useWeather();
+    const {
+        citiesWeather,
+        selectedCity,
+        lastUpdate,
+        updateSelectedCity,
+        updateWeather,
+    } = useWeather();
 
     const updateSelectedCityOnClick = selectedCity => {
+        window.localStorage.setItem('weather-city', selectedCity);
         updateSelectedCity(selectedCity);
     };
 
     return (
         <div className={className}>
             <WeatherCardsContainer>
+                <div className="cards__update">
+                    <p>{`Last update: ${lastUpdate}`}</p>
+                    <Button icon onClick={updateWeather}>
+                        <Icon name="sync" />
+                    </Button>
+                </div>
                 {citiesWeather.map((cityWeather, index) => {
                     const cityIsSelected = selectedCity === cityWeather.name;
                     return (

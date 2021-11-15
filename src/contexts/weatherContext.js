@@ -40,6 +40,7 @@ const ACTIONS = {
     updateCitiesWeather: 'UPDATE_CITIES_WEATHER',
     updateSelectedCity: 'UPDATE_SELECTED_CITY',
     updateSelectedCityDetail: 'UPDATE_SELECTED_CITY_DETAIL',
+    updateLastUpdate: 'UPDATE_LAST_UPDATE',
 };
 
 const updateCitiesWeather = citiesWeather => ({
@@ -57,6 +58,11 @@ const updateSelectedCityDetail = selectedCityDetail => ({
     selectedCityDetail,
 });
 
+const updateLastUpdate = lastUpdate => ({
+    type: ACTIONS.updateLastUpdate,
+    lastUpdate,
+});
+
 const weatherReducer = (state, action) => {
     switch (action.type) {
         case ACTIONS.updateCitiesWeather: {
@@ -67,6 +73,9 @@ const weatherReducer = (state, action) => {
         }
         case ACTIONS.updateSelectedCityDetail: {
             return { ...state, selectedCityDetail: action.selectedCityDetail };
+        }
+        case ACTIONS.updateLastUpdate: {
+            return { ...state, lastUpdate: action.lastUpdate };
         }
         default:
             return state;
@@ -80,6 +89,7 @@ export const WeatherState = ({ children }) => {
 
     const stateReducers = {
         updateSelectedCity: data => dispatch(updateSelectedCity(data)),
+        updateWeather: () => getWeather(),
     };
 
     const getWeather = async () => {
@@ -97,33 +107,40 @@ export const WeatherState = ({ children }) => {
                 humidity: weather.current.humidity,
                 daily: weather.daily,
                 hourly: weather.hourly.slice(0, 12),
-                // main: weather.main,
-                // datetime: new Date(weather.dt * 1000).toLocaleString(
-                //     'en-US',
-                //     {
-                //         weekday: 'short',
-                //         month: 'long',
-                //         day: 'numeric',
-                //         hour: '2-digit',
-                //         minute: '2-digit',
-                //     }
-                // ),
-                // id: weather.id,
             };
         });
+
+        const lastUpdate = new Date(
+            weatherResponses[0].current.dt * 1000
+        ).toLocaleString('en-US', {
+            weekday: 'short',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+
         dispatch(updateCitiesWeather(weatherFormated));
+        dispatch(updateLastUpdate(lastUpdate));
     };
 
     useEffect(() => {
         getWeather();
+        const cityFromLocal = window.localStorage.getItem('weather-city');
+        if (cityFromLocal) {
+            dispatch(updateSelectedCity(cityFromLocal));
+        }
     }, []);
 
     useEffect(() => {
         const selectedCityData = state.citiesWeather.find(
             cityWeather => cityWeather.name === state.selectedCity
         );
-        dispatch(updateSelectedCityDetail(selectedCityData || {}));
-    }, [state.selectedCity]);
+
+        if (selectedCityData) {
+            dispatch(updateSelectedCityDetail(selectedCityData));
+        }
+    }, [state.selectedCity, state.citiesWeather]);
 
     return (
         <WeatherContext.Provider
