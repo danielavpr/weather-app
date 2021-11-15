@@ -19,8 +19,7 @@ const WeatherCardsContainer = styled.div`
     .cards {
         &__update {
             display: flex;
-            justify-content: space-between;
-            margin-right: 35px;
+            justify-content: flex-start;
             align-items: baseline;
             margin-bottom: 12px;
             font-style: italic;
@@ -30,6 +29,7 @@ const WeatherCardsContainer = styled.div`
 
 const WeatherDetailContainer = styled.div`
     flex: 1;
+    min-width: 700px;
     padding: 32px 32px 32px 0;
 `;
 
@@ -45,11 +45,9 @@ const WeatherCardRow = styled.div`
 `;
 
 const Selected = styled.div`
-    width: 0;
-    height: 0;
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid transparent;
-    border-right: 30px solid #ede7e3;
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+    border-right: 20px solid #ede7e3;
     margin: auto 0 auto auto;
 `;
 
@@ -71,10 +69,10 @@ const Weather = ({ className }) => {
         <div className={className}>
             <WeatherCardsContainer>
                 <div className="cards__update">
-                    <p>{`Last update: ${lastUpdate}`}</p>
                     <Button icon onClick={updateWeather}>
                         <Icon name="sync" />
                     </Button>
+                    <p>{`Updated: ${lastUpdate}`}</p>
                 </div>
                 {citiesWeather.map((cityWeather, index) => {
                     const cityIsSelected = selectedCity === cityWeather.name;

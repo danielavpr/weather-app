@@ -7,14 +7,16 @@ const layout = css`
     width: 100% !important;
     display: flex !important;
     flex-direction: row !important;
+    flex-wrap: wrap;
     align-items: center;
+    text-align: center;
     .card {
         &__weather {
-            flex: 0.5;
+            min-width: 80px;
             text-align: center;
             img {
-                height: 56px;
-                width: 56px;
+                height: 48px;
+                width: 48px;
             }
             p {
                 font-size: 0.8rem;
@@ -22,19 +24,23 @@ const layout = css`
             }
         }
         &__temp {
-            flex: 0.8;
-            font-size: 1.8rem;
+            min-width: 80px;
+            font-size: 1.5rem;
             text-align: center;
         }
         &__details {
-            flex: 0.8;
+            min-width: 120px;
             &-city {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
             &-date {
                 color: grey;
             }
         }
+    }
+
+    @media (max-width: 1200px) {
+        flex-direction: column !important;
     }
 `;
 

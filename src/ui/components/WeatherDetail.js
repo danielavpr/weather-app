@@ -9,7 +9,7 @@ const layout = css`
     border-radius: 4px;
     padding: 32px;
     .humidity {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
 `;
 
