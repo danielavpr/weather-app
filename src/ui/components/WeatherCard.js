@@ -38,9 +38,13 @@ const layout = css`
     }
 `;
 
-const WeatherCard = ({ className, weather }) => {
+const WeatherCard = ({ className, weather, isSelected, onClick }) => {
     return (
-        <Card className={className}>
+        <Card
+            className={className}
+            onClick={() => onClick(weather.name)}
+            color={isSelected ? 'yellow' : undefined}
+        >
             <div className="card__weather">
                 <img src={weather.icon} />
                 <p>{weather.description}</p>

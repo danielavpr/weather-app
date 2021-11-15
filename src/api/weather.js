@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-export const fetchWeather = ({ city }) => {
+export const fetchWeather = ({ lat, lon }) => {
     return fetch(
-        `${process.env.REACT_APP_WEATHER_API}q=${city}&appid=${process.env.REACT_APP_WEATHER_KEY}`,
+        `${process.env.REACT_APP_WEATHER_API}/onecall?units=metric&lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${process.env.REACT_APP_WEATHER_KEY}`,
         { method: 'GET' }
     )
         .then(response => {
