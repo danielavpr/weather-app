@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { WeatherState } from './contexts/WeatherContext';
+import { WeatherProvider } from './contexts/WeatherContext';
 
 ReactDOM.render(
-    <WeatherState>
+    <WeatherProvider>
         <App />
-    </WeatherState>,
+    </WeatherProvider>,
     document.getElementById('root')
 );

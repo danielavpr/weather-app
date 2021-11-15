@@ -84,7 +84,7 @@ const weatherReducer = (state, action) => {
 
 export const WeatherContext = createContext(initialState);
 export const useWeather = () => useContext(WeatherContext);
-export const WeatherState = ({ children }) => {
+export const WeatherProvider = ({ children }) => {
     const [state, dispatch] = useReducer(weatherReducer, initialState);
 
     const stateReducers = {
